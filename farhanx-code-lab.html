@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FarhanX Code Lab - Learn HTML, CSS, JavaScript by building real projects. Free templates, playground, and beginner tutorials.">
+<meta name="keywords" content="learn HTML, CSS tutorials, JavaScript projects, free web templates, coding for beginners">
+<meta name="author" content="FarhanX Code Lab">
+<meta property="og:title" content="FarhanX Code Lab - Learn Web Dev by Building">
+<meta property="og:description" content="Copy real project source codes, learn from examples, build your own website today!">
+<title>FarhanX Code Lab — Learn. Build. Launch.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== ROOT & THEME ===== */
+:root {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --bg3: #1a1a24;
+  --card: #16161f;
+  --card2: #1e1e2a;
+  --border: #2a2a3a;
+  --accent: #00e5a0;
+  --accent2: #0099ff;
+  --accent3: #ff6b35;
+  --text: #f0f0f8;
+  --text2: #9090b0;
+  --text3: #5a5a80;
+  --glow: 0 0 40px rgba(0,229,160,0.15);
+  --radius: 14px;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-code: 'DM Mono', monospace;
+}
+[data-theme="light"] {
+  --bg: #f4f4f8;
+  --bg2: #ffffff;
+  --bg3: #eaeaf2;
+  --card: #ffffff;
+  --card2: #f0f0f8;
+  --border: #d8d8e8;
+  --text: #0a0a1a;
+  --text2: #444460;
+  --text3: #8888aa;
+  --glow: 0 0 40px rgba(0,229,160,0.1);
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background 0.3s,color 0.3s}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+button{cursor:pointer;font-family:var(--font-body)}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 1000;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  transition: background 0.3s;
+}
+[data-theme="light"] nav { background: rgba(244,244,248,0.85); }
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.88rem; font-weight: 500; color: var(--text2);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.search-box {
+  display: flex; align-items: center;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 12px; gap: 8px;
+}
+.search-box input {
+  background: none; border: none; outline: none;
+  color: var(--text); font-family: var(--font-body);
+  font-size: 0.85rem; width: 160px;
+}
+.search-box input::placeholder { color: var(--text3); }
+.theme-btn {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); padding: 6px 12px; border-radius: 8px;
+  font-size: 1rem; transition: all 0.2s;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+.hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; }
+.hamburger span { width: 22px; height: 2px; background: var(--text); display: block; transition: 0.3s; }
+
+/* ===== MOBILE NAV ===== */
+.mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 1.5rem 5%; flex-direction: column; gap: 1rem;
+  z-index: 999;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { color: var(--text2); font-size: 0.95rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 80px 5% 60px;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.3);
+  color: var(--accent); padding: 6px 14px; border-radius: 100px;
+  font-size: 0.78rem; font-family: var(--font-code);
+  font-weight: 500; margin-bottom: 1.5rem;
+  animation: pulse-badge 3s infinite;
+}
+@keyframes pulse-badge { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.hero-badge::before { content: '●'; font-size: 0.6rem; }
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 1.5rem;
+}
+.hero-title .hi { color: var(--accent); }
+.hero-title .line2 { color: var(--accent2); }
+.hero-desc {
+  font-size: 1.05rem; color: var(--text2);
+  max-width: 480px; line-height: 1.8; margin-bottom: 2rem;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: #000;
+  padding: 12px 28px; border-radius: 10px;
+  font-weight: 700; font-size: 0.92rem;
+  border: none; transition: all 0.2s;
+  font-family: var(--font-head);
+  letter-spacing: 0.3px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,160,0.35); }
+.btn-outline {
+  background: transparent; color: var(--text);
+  padding: 12px 28px; border-radius: 10px;
+  font-weight: 600; font-size: 0.92rem;
+  border: 1px solid var(--border); transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 2.5rem;
+}
+.stat { text-align: left; }
+.stat-num {
+  font-family: var(--font-head); font-size: 2rem;
+  font-weight: 800; color: var(--accent);
+}
+.stat-label { font-size: 0.8rem; color: var(--text3); margin-top: 2px; }
+
+/* Hero Code Preview */
+.hero-code-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.code-topbar {
+  background: var(--card2); padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.r{background:#ff5f57} .dot.y{background:#febc2e} .dot.g{background:#28c840}
+.code-title { font-size: 0.78rem; color: var(--text3); margin-left: 8px; font-family: var(--font-code); }
+.code-body {
+  padding: 1.5rem; font-family: var(--font-code);
+  font-size: 0.82rem; line-height: 2; overflow-x: auto;
+}
+.c-tag{color:#ff6b9d} .c-attr{color:#82aaff} .c-val{color:#c3e88d}
+.c-text{color:#f0f0f8} .c-comm{color:#546e7a}
+
+/* ===== BG DECORATION ===== */
+.bg-glow {
+  position: absolute; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
+  top: -100px; right: -100px; pointer-events: none;
+}
+.bg-glow2 {
+  position: absolute; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,153,255,0.05) 0%, transparent 70%);
+  bottom: 0; left: -100px; pointer-events: none;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 5%; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-family: var(--font-code); font-size: 0.75rem;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 2px; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800; letter-spacing: -1px;
+  margin-bottom: 0.8rem; line-height: 1.2;
+}
+.section-desc { color: var(--text2); font-size: 1rem; max-width: 560px; line-height: 1.8; }
+
+/* ===== LEARN TRACKS ===== */
+#learn { background: var(--bg2); }
+.learn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.learn-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2rem;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.learn-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; transition: 0.3s;
+}
+.learn-card.html::before { background: #ff6b35; }
+.learn-card.css::before { background: #0099ff; }
+.learn-card.js::before { background: #f7df1e; }
+.learn-card:hover { transform: translateY(-4px); border-color: var(--border); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.card-title { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+.card-desc { color: var(--text2); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem; }
+.card-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+.topic-tag {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); font-size: 0.72rem;
+  padding: 3px 10px; border-radius: 100px;
+  font-family: var(--font-code);
+}
+.card-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; font-weight: 600;
+  padding: 8px 16px; border-radius: 8px;
+  border: none; transition: all 0.2s;
+}
+.html .card-btn { background: rgba(255,107,53,0.15); color: #ff6b35; }
+.css .card-btn { background: rgba(0,153,255,0.15); color: #0099ff; }
+.js .card-btn { background: rgba(247,223,30,0.15); color: #d4b800; }
+.card-btn:hover { transform: translateX(4px); }
+
+/* ===== PROJECTS ===== */
+#projects { background: var(--bg); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.project-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: all 0.3s;
+}
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 16px 50px rgba(0,0,0,0.35); border-color: rgba(0,229,160,0.2); }
+.project-preview {
+  height: 140px; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; position: relative; overflow: hidden;
+}
+.p1{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.p2{background:linear-gradient(135deg,#2d1b69,#1a0533)}
+.p3{background:linear-gradient(135deg,#0d4a2f,#003d1f)}
+.p4{background:linear-gradient(135deg,#1a2a4a,#0a1628)}
+.p5{background:linear-gradient(135deg,#4a1a1a,#2d0a0a)}
+.p6{background:linear-gradient(135deg,#2a1a3e,#1a0a2d)}
+.p7{background:linear-gradient(135deg,#1a3a2a,#0a2418)}
+.p8{background:linear-gradient(135deg,#3a2a1a,#281a08)}
+.p9{background:linear-gradient(135deg,#1a2a3a,#0a1828)}
+.p10{background:linear-gradient(135deg,#2a1a2a,#1a0a1a)}
+.project-info { padding: 1.2rem; }
+.project-name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+.project-desc { color: var(--text2); font-size: 0.82rem; line-height: 1.6; margin-bottom: 1rem; }
+.project-actions { display: flex; gap: 8px; }
+.btn-view {
+  flex: 1; padding: 8px; border-radius: 8px; border: none;
+  background: var(--accent); color: #000;
+  font-size: 0.8rem; font-weight: 700;
+  transition: 0.2s;
+}
+.btn-view:hover { opacity: 0.85; }
+.btn-code {
+  padding: 8px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: none;
+  color: var(--text2); font-size: 0.8rem; transition: 0.2s;
+}
+.btn-code:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ===== CODE MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85); z-index: 2000;
+  backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; max-width: 780px; width: 100%;
+  max-height: 90vh; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.modal-head {
+  padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-title { font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; }
+.modal-close {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); width: 34px; height: 34px;
+  border-radius: 8px; font-size: 1.1rem; transition: 0.2s;
+}
+.modal-close:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+.modal-body { padding: 1.5rem 2rem; overflow-y: auto; flex: 1; }
+.modal-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+.tab-btn {
+  padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border);
+  background: none; color: var(--text2); font-size: 0.82rem;
+  font-family: var(--font-code); transition: 0.2s;
+}
+.tab-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.code-block {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem;
+  font-family: var(--font-code); font-size: 0.8rem;
+  line-height: 1.9; color: #c9d1d9;
+  overflow-x: auto; white-space: pre;
+  max-height: 360px; overflow-y: auto;
+  position: relative;
+}
+.copy-bar {
+  display: flex; justify-content: flex-end; margin-bottom: 0.6rem;
+}
+.copy-btn {
+  background: var(--card2); border: 1px solid var(--border);
+  color: var(--text2); padding: 6px 14px; border-radius: 7px;
+  font-size: 0.78rem; font-family: var(--font-code); transition: 0.2s;
+}
+.copy-btn:hover, .copy-btn.copied { background: var(--accent); color: #000; border-color: var(--accent); }
+.explanation {
+  margin-top: 1.2rem; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem;
+}
+.explanation h4 { font-family: var(--font-head); font-size: 0.95rem; margin-bottom: 0.6rem; color: var(--accent); }
+.explanation p { color: var(--text2); font-size: 0.85rem; line-height: 1.8; }
+
+/* ===== PLAYGROUND ===== */
+#playground { background: var(--bg2); }
+.playground-wrap {
+  margin-top: 2.5rem; background: var(--card);
+  border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+}
+.playground-topbar {
+  background: var(--card2); padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px;
+}
+.playground-tabs { display: flex; gap: 6px; }
+.pg-tab {
+  padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border);
+  background: none; color: var(--text2); font-size: 0.78rem;
+  font-family: var(--font-code); transition: 0.2s;
+}
+.pg-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.run-btn {
+  background: var(--accent); color: #000;
+  border: none; padding: 8px 20px; border-radius: 8px;
+  font-weight: 700; font-size: 0.85rem;
+  transition: 0.2s;
+}
+.run-btn:hover { opacity: 0.85; transform: scale(1.02); }
+.playground-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  height: 420px;
+}
+.editor-area {
+  padding: 1rem; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+}
+.editor-label {
+  font-family: var(--font-code); font-size: 0.72rem;
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+#code-editor {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: var(--text); font-family: var(--font-code); font-size: 0.82rem;
+  line-height: 1.9; resize: none;
+  white-space: pre; overflow: auto;
+}
+.output-area { display: flex; flex-direction: column; }
+.output-label {
+  font-family: var(--font-code); font-size: 0.72rem;
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: 1px; padding: 1rem 1rem 8px;
+  border-bottom: 1px solid var(--border);
+}
+#output-frame {
+  flex: 1; border: none; background: white;
+}
+
+/* ===== TEMPLATES ===== */
+#templates { background: var(--bg); }
+.templates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.template-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; transition: 0.3s;
+}
+.template-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.template-img {
+  height: 120px; display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; font-family: var(--font-head); font-weight: 800;
+  letter-spacing: -2px;
+}
+.t1{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)}
+.t2{background:linear-gradient(135deg,#0d4a2f 0%,#003d1f 100%)}
+.t3{background:linear-gradient(135deg,#2d1b69 0%,#1a0533 100%)}
+.t4{background:linear-gradient(135deg,#4a1a1a 0%,#2d0a0a 100%)}
+.template-info { padding: 1rem; }
+.template-name { font-family: var(--font-head); font-weight: 700; margin-bottom: 0.3rem; }
+.template-meta { font-size: 0.78rem; color: var(--text3); margin-bottom: 1rem; font-family: var(--font-code); }
+.template-get {
+  width: 100%; padding: 9px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); font-size: 0.82rem; transition: 0.2s;
+}
+.template-get:hover { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+/* ===== FAQ ===== */
+#faq { background: var(--bg2); }
+.faq-list { max-width: 720px; margin-top: 3rem; }
+.faq-item {
+  border: 1px solid var(--border); border-radius: 12px;
+  margin-bottom: 10px; overflow: hidden; transition: 0.2s;
+}
+.faq-item:hover { border-color: rgba(0,229,160,0.3); }
+.faq-q {
+  width: 100%; padding: 1.1rem 1.5rem;
+  background: var(--card); border: none; color: var(--text);
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
+  text-align: left; display: flex; justify-content: space-between; align-items: center;
+  transition: 0.2s;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-icon { font-size: 1.2rem; transition: 0.3s; color: var(--text3); }
+.faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
+.faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+  background: var(--card);
+}
+.faq-a-inner {
+  padding: 0 1.5rem 1.2rem;
+  color: var(--text2); font-size: 0.9rem; line-height: 1.8;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 60px 5% 30px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+}
+.footer-brand .logo { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+.footer-desc { color: var(--text2); font-size: 0.88rem; line-height: 1.8; max-width: 280px; }
+.footer-col h4 {
+  font-family: var(--font-head); font-weight: 700;
+  font-size: 0.88rem; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--text3);
+  margin-bottom: 1.2rem;
+}
+.footer-col a {
+  display: block; color: var(--text2); font-size: 0.88rem;
+  margin-bottom: 0.7rem; transition: 0.2s;
+}
+.footer-col a:hover { color: var(--accent); transform: translateX(3px); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy { font-size: 0.82rem; color: var(--text3); }
+.footer-copy span { color: var(--accent); }
+
+/* ===== AD PLACEHOLDER ===== */
+.ad-banner {
+  background: var(--card2); border: 1px dashed var(--border);
+  border-radius: 10px; padding: 1.5rem; text-align: center;
+  color: var(--text3); font-size: 0.8rem; font-family: var(--font-code);
+  margin: 2rem 0;
+}
+.ad-banner span { color: var(--accent); font-weight: 600; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .learn-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .search-box { display: none; }
+  .hamburger { display: flex; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-code-card { display: none; }
+  .learn-grid { grid-template-columns: 1fr; }
+  .playground-split { grid-template-columns: 1fr; height: auto; }
+  .editor-area { height: 250px; border-right: none; border-bottom: 1px solid var(--border); }
+  #output-frame { height: 250px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { gap: 1.5rem; }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* ===== PAGE SECTIONS ===== */
+.page { display: none; }
+.page.active { display: block; }
+#main-home { display: block; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="logo" onclick="showHome()">Farhan<span>X</span></a>
+  <div class="nav-links">
+    <a href="#learn" onclick="showHome()">Learn</a>
+    <a href="#projects" onclick="showHome()">Projects</a>
+    <a href="#playground" onclick="showHome()">Playground</a>
+    <a href="#templates" onclick="showHome()">Templates</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('contact')">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Search tutorials..." oninput="handleSearch(this.value)">
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" id="theme-toggle">🌙</button>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#learn" onclick="closeMobileMenu();showHome()">📚 Learn</a>
+  <a href="#projects" onclick="closeMobileMenu();showHome()">🚀 Projects</a>
+  <a href="#playground" onclick="closeMobileMenu();showHome()">⚡ Playground</a>
+  <a href="#templates" onclick="closeMobileMenu();showHome()">🎨 Templates</a>
+  <a href="#" onclick="closeMobileMenu();showPage('about')">ℹ️ About</a>
+  <a href="#" onclick="closeMobileMenu();showPage('contact')">📧 Contact</a>
+  <a href="#" onclick="closeMobileMenu();showPage('privacy')">🔒 Privacy Policy</a>
+</div>
+
+<!-- ======================== MAIN HOME ======================== -->
+<div id="main-home" class="page active">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="bg-glow"></div>
+  <div class="bg-glow2"></div>
+  <div class="hero-grid container">
+    <div>
+      <div class="hero-badge fade-up">🟢 Free for Everyone</div>
+      <h1 class="hero-title fade-up delay-1">
+        <span class="hi">Build</span> Real<br>
+        <span class="line2">Websites.</span><br>
+        Start Today.
+      </h1>
+      <p class="hero-desc fade-up delay-2">
+        FarhanX Code Lab — Copy real HTML/CSS/JS projects, run code live, and learn web development by actually building. No theory overload.
+      </p>
+      <div class="hero-btns fade-up delay-3">
+        <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">🚀 Explore Projects</button>
+        <button class="btn-outline" onclick="document.getElementById('playground').scrollIntoView({behavior:'smooth'})">⚡ Try Playground</button>
+      </div>
+      <div class="hero-stats fade-up delay-4">
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Free Projects</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Learning Tracks</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free & Open</div></div>
+      </div>
+    </div>
+    <div class="hero-code-card fade-up delay-2">
+      <div class="code-topbar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <span class="code-title">index.html — FarhanX Project</span>
+      </div>
+      <div class="code-body">
+<span class="c-comm">&lt;!-- Your First Website 🚀 --&gt;</span>
+<span class="c-tag">&lt;!DOCTYPE</span> <span class="c-attr">html</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;html</span> <span class="c-attr">lang</span>=<span class="c-val">"en"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;head&gt;</span>
+  <span class="c-tag">&lt;title&gt;</span><span class="c-text">My Website</span><span class="c-tag">&lt;/title&gt;</span>
+<span class="c-tag">&lt;/head&gt;</span>
+<span class="c-tag">&lt;body&gt;</span>
+  <span class="c-tag">&lt;h1&gt;</span><span class="c-text">Hello World! 🌍</span><span class="c-tag">&lt;/h1&gt;</span>
+  <span class="c-tag">&lt;p&gt;</span><span class="c-text">I built this myself!</span><span class="c-tag">&lt;/p&gt;</span>
+  <span class="c-tag">&lt;button</span> <span class="c-attr">onclick</span>=<span class="c-val">"alert('🎉')"</span><span class="c-tag">&gt;</span>
+    <span class="c-text">Click Me!</span>
+  <span class="c-tag">&lt;/button&gt;</span>
+<span class="c-tag">&lt;/body&gt;</span>
+<span class="c-tag">&lt;/html&gt;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AD BANNER -->
+<div class="container" style="padding:0 5%">
+  <div class="ad-banner">
+    <span>[ Google AdSense Banner ]</span> — Advertisement space 728×90
+  </div>
+</div>
+
+<!-- LEARN SECTION -->
+<section id="learn">
+  <div class="container">
+    <div class="section-label">// START HERE</div>
+    <h2 class="section-title">Pick Your Learning Track</h2>
+    <p class="section-desc">Begin with HTML, move to CSS, then master JavaScript. Each track has real examples.</p>
+    <div class="learn-grid">
+
+      <div class="learn-card html">
+        <div class="card-icon">🏗️</div>
+        <div class="card-title">HTML Basics</div>
+        <div class="card-desc">Structure of every webpage. Learn tags, forms, links, images, and semantic HTML.</div>
+        <div class="card-topics">
+          <span class="topic-tag">Tags & Elements</span>
+          <span class="topic-tag">Forms</span>
+          <span class="topic-tag">Links & Images</span>
+          <span class="topic-tag">Semantic HTML</span>
+          <span class="topic-tag">Tables</span>
+        </div>
+        <button class="card-btn" onclick="openLearn('html')">Start HTML →</button>
+      </div>
+
+      <div class="learn-card css">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">CSS Styling</div>
+        <div class="card-desc">Make it beautiful. Colors, fonts, flexbox, grid, animations, and responsive design.</div>
+        <div class="card-topics">
+          <span class="topic-tag">Selectors</span>
+          <span class="topic-tag">Flexbox</span>
+          <span class="topic-tag">Grid</span>
+          <span class="topic-tag">Animations</span>
+          <span class="topic-tag">Media Queries</span>
+        </div>
+        <button class="card-btn" onclick="openLearn('css')">Start CSS →</button>
+      </div>
+
+      <div class="learn-card js">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">JavaScript</div>
+        <div class="card-desc">Make it interactive. Variables, functions, DOM manipulation, events, and APIs.</div>
+        <div class="card-topics">
+          <span class="topic-tag">Variables</span>
+          <span class="topic-tag">Functions</span>
+          <span class="topic-tag">DOM</span>
+          <span class="topic-tag">Events</span>
+          <span class="topic-tag">Fetch API</span>
+        </div>
+        <button class="card-btn" onclick="openLearn('js')">Start JS →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AD BANNER -->
+<div class="container" style="padding:0 5%">
+  <div class="ad-banner">
+    <span>[ Google AdSense ]</span> — Rectangle Ad 300×250
+  </div>
+</div>
+
+<!-- PROJECTS SECTION -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">// COPY & BUILD</div>
+    <h2 class="section-title">10 Fun Projects — Full Code</h2>
+    <p class="section-desc">Real project source code. Preview, copy, learn. Each project is beginner-friendly.</p>
+    <div class="projects-grid" id="projects-grid">
+
+      <div class="project-card">
+        <div class="project-preview p1">🪙</div>
+        <div class="project-info">
+          <div class="project-name">Coin Toss App</div>
+          <div class="project-desc">Flip a coin with animation — Heads or Tails!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('coin')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('coin')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p2">💕</div>
+        <div class="project-info">
+          <div class="project-name">Love Calculator</div>
+          <div class="project-desc">Enter two names and get a love compatibility score!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('love')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('love')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p3">🤝</div>
+        <div class="project-info">
+          <div class="project-name">Friendship Detector</div>
+          <div class="project-desc">Are you and your friend compatible? Find out!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('friend')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('friend')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p4">🧠</div>
+        <div class="project-info">
+          <div class="project-name">IQ Scanner</div>
+          <div class="project-desc">Fun fake IQ test — results that surprise everyone!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('iq')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('iq')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p5">😈</div>
+        <div class="project-info">
+          <div class="project-name">Villain Name Generator</div>
+          <div class="project-desc">Generate your ultimate villain name and title!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('villain')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('villain')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p6">🦸</div>
+        <div class="project-info">
+          <div class="project-name">Superhero Generator</div>
+          <div class="project-desc">Discover your superhero name and superpower!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('superhero')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('superhero')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p7">🌙</div>
+        <div class="project-info">
+          <div class="project-name">Eid Greeting Generator</div>
+          <div class="project-desc">Create personalized Eid Mubarak greetings!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('eid')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('eid')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p8">💍</div>
+        <div class="project-info">
+          <div class="project-name">Anniversary Greeting</div>
+          <div class="project-desc">Generate beautiful anniversary messages with confetti!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('anniversary')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('anniversary')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p9">🎲</div>
+        <div class="project-info">
+          <div class="project-name">Random Life Generator</div>
+          <div class="project-desc">Get a randomly generated fictional life story!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('life')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('life')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-preview p10">🔮</div>
+        <div class="project-info">
+          <div class="project-name">Future Predictor</div>
+          <div class="project-desc">See what your future holds — shake the magic 8-ball!</div>
+          <div class="project-actions">
+            <button class="btn-view" onclick="openProject('future')">View Code</button>
+            <button class="btn-code" onclick="runInPlayground('future')">▶ Run</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PLAYGROUND SECTION -->
+<section id="playground">
+  <div class="container">
+    <div class="section-label">// LIVE EDITOR</div>
+    <h2 class="section-title">HTML Playground ⚡</h2>
+    <p class="section-desc">Write HTML, CSS and JavaScript — see the result instantly. No setup needed.</p>
+    <div class="playground-wrap">
+      <div class="playground-topbar">
+        <div class="playground-tabs">
+          <button class="pg-tab active" id="pg-html-tab" onclick="switchPgTab('html')">HTML</button>
+          <button class="pg-tab" id="pg-css-tab" onclick="switchPgTab('css')">CSS</button>
+          <button class="pg-tab" id="pg-js-tab" onclick="switchPgTab('js')">JS</button>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="copy-btn" onclick="copyPlayground()">📋 Copy</button>
+          <button class="run-btn" onclick="runCode()">▶ Run Code</button>
+        </div>
+      </div>
+      <div class="playground-split">
+        <div class="editor-area">
+          <div class="editor-label">Editor</div>
+          <textarea id="code-editor" spellcheck="false" onkeydown="handleTab(event)"></textarea>
+        </div>
+        <div class="output-area">
+          <div class="output-label">Output Preview</div>
+          <iframe id="output-frame" sandbox="allow-scripts"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES SECTION -->
+<section id="templates">
+  <div class="container">
+    <div class="section-label">// FREE TEMPLATES</div>
+    <h2 class="section-title">Starter Templates</h2>
+    <p class="section-desc">Ready-made HTML templates. Copy and customize for your own website.</p>
+    <div class="templates-grid">
+      <div class="template-card">
+        <div class="template-img t1">PORT</div>
+        <div class="template-info">
+          <div class="template-name">Portfolio Template</div>
+          <div class="template-meta">HTML • CSS • JS • 1 file</div>
+          <button class="template-get" onclick="openTemplate('portfolio')">Get Free Template →</button>
+        </div>
+      </div>
+      <div class="template-card">
+        <div class="template-img t2">BLOG</div>
+        <div class="template-info">
+          <div class="template-name">Blog Template</div>
+          <div class="template-meta">HTML • CSS • 1 file</div>
+          <button class="template-get" onclick="openTemplate('blog')">Get Free Template →</button>
+        </div>
+      </div>
+      <div class="template-card">
+        <div class="template-img t3">LAND</div>
+        <div class="template-info">
+          <div class="template-name">Landing Page</div>
+          <div class="template-meta">HTML • CSS • JS • 1 file</div>
+          <button class="template-get" onclick="openTemplate('landing')">Get Free Template →</button>
+        </div>
+      </div>
+      <div class="template-card">
+        <div class="template-img t4">LINK</div>
+        <div class="template-info">
+          <div class="template-name">Link in Bio Page</div>
+          <div class="template-meta">HTML • CSS • 1 file</div>
+          <button class="template-get" onclick="openTemplate('linkinbio')">Get Free Template →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section id="faq">
+  <div class="container">
+    <div class="section-label">// FAQ</div>
+    <h2 class="section-title">Common Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is FarhanX Code Lab completely free?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! All project source codes, templates, and tutorials are 100% free. You can copy, use, and modify them for your own projects without any cost.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need to know coding to use this site?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">No! This site is designed for complete beginners. Start from the HTML track and follow the tutorials step by step. Each project has full source code with explanations.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I use these projects to earn money?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely! Use the projects to build your portfolio. Modify them, add your branding, and launch your own website. The code is yours to use freely.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I add AdSense to my website?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Apply for Google AdSense once your website has original content and regular visitors. Place the AdSense script in your HTML and ad units in strategic spots like between sections or in the sidebar.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What features are coming next?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">We're building: user accounts, project submission, coding challenges, leaderboard, certificates, and a comments section. Stay tuned for updates!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">Farhan<span>X</span></span>
+        <p class="footer-desc">Learn web development by building real projects. Free source codes, live playground, and beginner tutorials.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="#learn">HTML Basics</a>
+        <a href="#learn">CSS Styling</a>
+        <a href="#learn">JavaScript</a>
+        <a href="#templates">Templates</a>
+      </div>
+      <div class="footer-col">
+        <h4>Projects</h4>
+        <a href="#" onclick="openProject('coin')">Coin Toss</a>
+        <a href="#" onclick="openProject('love')">Love Calculator</a>
+        <a href="#" onclick="openProject('villain')">Villain Generator</a>
+        <a href="#" onclick="openProject('future')">Future Predictor</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="#" onclick="showPage('about')">About Us</a>
+        <a href="#" onclick="showPage('contact')">Contact Us</a>
+        <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+        <a href="#" onclick="showPage('terms')">Terms & Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 <span>FarhanX Code Lab</span> — Made with ❤️ for beginners</div>
+      <div class="footer-copy">Learn. Build. <span>Launch.</span></div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end main-home -->
+
+
+<!-- ======================== INNER PAGES ======================== -->
+<div id="page-about" class="page" style="padding-top:100px;min-height:100vh">
+  <div class="container" style="padding:0 5%;max-width:800px">
+    <div class="section-label">// ABOUT</div>
+    <h1 class="section-title">About FarhanX Code Lab</h1>
+    <div style="margin-top:2rem;color:var(--text2);line-height:2;font-size:0.95rem">
+      <p style="margin-bottom:1.5rem">FarhanX Code Lab is a free beginner web development learning platform. Our mission is simple: teach real-world coding by building real projects.</p>
+      <p style="margin-bottom:1.5rem">Instead of boring theory lectures, we give you working source code. Copy it, run it, modify it, learn from it. That's how real developers learn.</p>
+      <p style="margin-bottom:1.5rem">Every project on this site is hand-crafted to be fun, interesting, and educational — from Coin Toss apps to Future Predictors.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin-bottom:1rem;margin-top:2rem">Our Vision 🚀</h3>
+      <p style="margin-bottom:1.5rem">To become the #1 beginner-friendly coding hub where anyone — regardless of background — can learn to build websites and earn from the internet.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin-bottom:1rem;margin-top:2rem">Future Plans 📋</h3>
+      <ul style="padding-left:1.5rem;display:flex;flex-direction:column;gap:0.7rem">
+        <li>User accounts & progress tracking</li>
+        <li>Coding challenges & leaderboards</li>
+        <li>Community project uploads</li>
+        <li>Completion certificates</li>
+        <li>Video tutorials</li>
+      </ul>
+    </div>
+    <button class="btn-primary" style="margin-top:2.5rem" onclick="showHome()">← Back to Home</button>
+  </div>
+</div>
+
+<div id="page-contact" class="page" style="padding-top:100px;min-height:100vh">
+  <div class="container" style="padding:0 5%;max-width:700px">
+    <div class="section-label">// CONTACT</div>
+    <h1 class="section-title">Get In Touch</h1>
+    <p style="color:var(--text2);margin-top:1rem;margin-bottom:2.5rem">Have a project idea, collaboration request, or feedback? We'd love to hear from you!</p>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem">
+      <div style="margin-bottom:1.5rem">
+        <label style="display:block;font-size:0.82rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-code)">YOUR NAME</label>
+        <input type="text" placeholder="Enter your name" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:var(--font-body);font-size:0.9rem;outline:none">
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <label style="display:block;font-size:0.82rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-code)">EMAIL</label>
+        <input type="email" placeholder="your@email.com" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:var(--font-body);font-size:0.9rem;outline:none">
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <label style="display:block;font-size:0.82rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-code)">MESSAGE</label>
+        <textarea rows="5" placeholder="What's on your mind?" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:var(--font-body);font-size:0.9rem;outline:none;resize:vertical"></textarea>
+      </div>
+      <button class="btn-primary" onclick="alert('Message sent! We will reply soon. ✅')">Send Message →</button>
+    </div>
+    <button class="btn-outline" style="margin-top:1.5rem" onclick="showHome()">← Back to Home</button>
+  </div>
+</div>
+
+<div id="page-privacy" class="page" style="padding-top:100px;min-height:100vh">
+  <div class="container" style="padding:0 5%;max-width:800px">
+    <div class="section-label">// LEGAL</div>
+    <h1 class="section-title">Privacy Policy</h1>
+    <div style="margin-top:2rem;color:var(--text2);line-height:2;font-size:0.9rem">
+      <p><strong style="color:var(--text)">Last Updated: 2025</strong></p>
+      <br>
+      <p>FarhanX Code Lab ("we", "us") is committed to protecting your privacy. This policy explains what data we collect and how we use it.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">Data We Collect</h3>
+      <p>We do not collect personal data unless you voluntarily provide it (e.g., via the contact form). We may use Google Analytics to track anonymous page views.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">Google AdSense</h3>
+      <p>We use Google AdSense to display ads. Google may use cookies to show relevant ads. Visit Google's privacy policy for more information.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">Cookies</h3>
+      <p>This site stores your theme preference (dark/light) in your browser's local storage. No tracking cookies are set by us directly.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">Contact</h3>
+      <p>Questions? Use the Contact page to reach us.</p>
+    </div>
+    <button class="btn-primary" style="margin-top:2.5rem" onclick="showHome()">← Back to Home</button>
+  </div>
+</div>
+
+<div id="page-terms" class="page" style="padding-top:100px;min-height:100vh">
+  <div class="container" style="padding:0 5%;max-width:800px">
+    <div class="section-label">// LEGAL</div>
+    <h1 class="section-title">Terms & Conditions</h1>
+    <div style="margin-top:2rem;color:var(--text2);line-height:2;font-size:0.9rem">
+      <p>By using FarhanX Code Lab, you agree to these terms.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">Free to Use</h3>
+      <p>All source codes and tutorials are free for personal and commercial use. Attribution is appreciated but not required.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">No Warranty</h3>
+      <p>Code is provided "as-is". FarhanX Code Lab is not responsible for issues arising from use of the code.</p>
+      <h3 style="font-family:var(--font-head);color:var(--text);margin:1.5rem 0 0.7rem">Content</h3>
+      <p>Do not use this platform to submit harmful, offensive, or illegal content. We reserve the right to remove any content that violates these terms.</p>
+    </div>
+    <button class="btn-primary" style="margin-top:2.5rem" onclick="showHome()">← Back to Home</button>
+  </div>
+</div>
+
+<!-- ======================== CODE MODAL ======================== -->
+<div class="modal-overlay" id="code-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title">Project Code</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tabs">
+        <button class="tab-btn active" onclick="switchTab('code',this)">💻 Source Code</button>
+        <button class="tab-btn" onclick="switchTab('explain',this)">📖 Explanation</button>
+      </div>
+      <div id="tab-code">
+        <div class="copy-bar">
+          <button class="copy-btn" id="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+        </div>
+        <div class="code-block" id="modal-code"></div>
+      </div>
+      <div id="tab-explain" style="display:none">
+        <div class="explanation">
+          <h4>📖 How This Works</h4>
+          <p id="modal-explanation"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== LEARN MODAL ======================== -->
+<div class="modal-overlay" id="learn-modal">
+  <div class="modal" style="max-width:860px">
+    <div class="modal-head">
+      <div class="modal-title" id="learn-modal-title">Learn HTML</div>
+      <button class="modal-close" onclick="closeLearnModal()">✕</button>
+    </div>
+    <div class="modal-body" id="learn-modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ===== THEME =====
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-toggle').textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+(function(){
+  const t = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('theme-toggle').textContent = t === 'dark' ? '☀️' : '🌙';
+})();
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// ===== PAGE NAV =====
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showHome() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('main-home').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===== SEARCH =====
+function handleSearch(val) {
+  if (!val) return;
+  const v = val.toLowerCase();
+  const cards = document.querySelectorAll('.project-card');
+  cards.forEach(c => {
+    const name = c.querySelector('.project-name').textContent.toLowerCase();
+    c.style.display = name.includes(v) ? '' : 'none';
+  });
+}
+
+// ===== FAQ =====
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+}
+
+// ===== PLAYGROUND =====
+const pgCode = {
+  html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Page</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; background: #0a0a0f; color: #f0f0f8; }
+    h1 { color: #00e5a0; font-size: 2.5rem; }
+    button { background: #00e5a0; color: #000; border: none; padding: 12px 28px; border-radius: 8px; font-size: 1rem; cursor: pointer; margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Hello World! 🌍</h1>
+  <p>Edit this code and click Run!</p>
+  <button onclick="alert('🎉 It works!')">Click Me!</button>
+</body>
+</html>`,
+  css: `/* Type CSS here */
+body {
+  background: #0a0a0f;
+  color: #f0f0f8;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+h1 {
+  color: #00e5a0;
+  font-size: 3rem;
+  text-align: center;
+}`,
+  js: `// Type JavaScript here
+document.addEventListener('DOMContentLoaded', () => {
+  const colors = ['#00e5a0','#0099ff','#ff6b35','#f7df1e'];
+  let i = 0;
+  setInterval(() => {
+    document.body.style.borderTop = '4px solid ' + colors[i % colors.length];
+    i++;
+  }, 800);
+  console.log('FarhanX Playground Ready! ⚡');
+});`
+};
+let activePgTab = 'html';
+document.getElementById('code-editor').value = pgCode.html;
+
+function switchPgTab(tab) {
+  pgCode[activePgTab] = document.getElementById('code-editor').value;
+  activePgTab = tab;
+  document.getElementById('code-editor').value = pgCode[tab];
+  document.querySelectorAll('.pg-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('pg-' + tab + '-tab').classList.add('active');
+}
+
+function runCode() {
+  pgCode[activePgTab] = document.getElementById('code-editor').value;
+  let full = '';
+  if (activePgTab === 'html') {
+    full = pgCode.html;
+  } else if (activePgTab === 'css') {
+    full = `<html><head><style>${pgCode.css}</style></head><body><h1>CSS Preview</h1><p>Styled with your CSS above!</p></body></html>`;
+  } else {
+    full = `<html><head><style>body{font-family:sans-serif;background:#0a0a0f;color:#f0f0f8;padding:20px}</style></head><body><h1 style="color:#00e5a0">JS Output</h1><div id="out"></div><script>${pgCode.js}<\/script></body></html>`;
+  }
+  const frame = document.getElementById('output-frame');
+  frame.srcdoc = full;
+}
+
+function handleTab(e) {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const ta = e.target;
+    const start = ta.selectionStart, end = ta.selectionEnd;
+    ta.value = ta.value.substring(0,start) + '  ' + ta.value.substring(end);
+    ta.selectionStart = ta.selectionEnd = start + 2;
+  }
+}
+
+function copyPlayground() {
+  pgCode[activePgTab] = document.getElementById('code-editor').value;
+  navigator.clipboard.writeText(document.getElementById('code-editor').value).then(() => {
+    alert('✅ Code copied!');
+  });
+}
+
+// Run on load
+setTimeout(runCode, 500);
+
+// ===== PROJECT DATA =====
+const projects = {
+  coin: {
+    name: 'Coin Toss App',
+    explanation: 'Uses Math.random() to generate a random number. If it is greater than 0.5, it shows Heads, otherwise Tails. CSS animations make the coin flip visually. The result is displayed in a div using innerHTML.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Coin Toss - FarhanX</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: sans-serif; background: #0a0a0f; color: #f0f0f8; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  h1 { font-size: 2rem; color: #00e5a0; margin-bottom: 2rem; }
+  .coin { width: 120px; height: 120px; border-radius: 50%; font-size: 3rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; border: 4px solid #00e5a0; background: #16161f; transition: transform 0.5s; }
+  .coin.flip { animation: flipCoin 0.6s ease; }
+  @keyframes flipCoin { 0%,100%{transform:rotateY(0)} 50%{transform:rotateY(180deg)} }
+  .result { font-size: 1.5rem; font-weight: bold; min-height: 2rem; margin-bottom: 1.5rem; color: #f7df1e; }
+  button { background: #00e5a0; color: #000; border: none; padding: 14px 36px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+  button:hover { transform: scale(1.05); opacity: 0.9; }
+  .score { margin-top: 1.5rem; color: #9090b0; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+  <h1>🪙 Coin Toss</h1>
+  <div class="coin" id="coin">🪙</div>
+  <div class="result" id="result">Press Flip!</div>
+  <button onclick="flipCoin()">Flip Coin!</button>
+  <div class="score" id="score">Heads: 0 | Tails: 0</div>
+  <script>
+    let h = 0, t = 0;
+    function flipCoin() {
+      const coin = document.getElementById('coin');
+      const result = document.getElementById('result');
+      coin.classList.remove('flip');
+      void coin.offsetWidth;
+      coin.classList.add('flip');
+      setTimeout(() => {
+        const isHeads = Math.random() > 0.5;
+        if (isHeads) { h++; result.textContent = '🎉 HEADS!'; coin.textContent = '🟡'; }
+        else { t++; result.textContent = '💫 TAILS!'; coin.textContent = '⚪'; }
+        document.getElementById('score').textContent = \`Heads: \${h} | Tails: \${t}\`;
+      }, 400);
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  love: {
+    name: 'Love Calculator',
+    explanation: 'Takes two names as input. Converts each character to its char code, sums them up, and uses modulo 100 to get a percentage. A fun algorithm that gives a consistent result for the same two names. CSS gradient changes based on the score.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Love Calculator - FarhanX</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: sans-serif; background: #0a0a0f; color: #f0f0f8; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  h1 { font-size: 2rem; color: #ff6b9d; margin-bottom: 2rem; }
+  .card { background: #16161f; border: 1px solid #2a2a3a; border-radius: 16px; padding: 2.5rem; max-width: 420px; width: 100%; text-align: center; }
+  input { width: 100%; padding: 12px 16px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; color: #f0f0f8; font-size: 1rem; margin-bottom: 1rem; outline: none; transition: 0.2s; }
+  input:focus { border-color: #ff6b9d; }
+  .heart { font-size: 3rem; margin: 1.5rem 0; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  button { background: #ff6b9d; color: #fff; border: none; padding: 14px 36px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 1.5rem; transition: 0.2s; }
+  button:hover { opacity: 0.85; transform: scale(1.02); }
+  .bar-wrap { background: #0a0a0f; border-radius: 10px; height: 20px; overflow: hidden; margin-bottom: 0.5rem; }
+  .bar { height: 100%; background: linear-gradient(90deg, #ff6b9d, #ff3366); border-radius: 10px; transition: width 1s ease; width: 0%; }
+  .percent { font-size: 2.5rem; font-weight: bold; color: #ff6b9d; }
+  .msg { color: #9090b0; font-size: 0.88rem; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+  <h1>💕 Love Calculator</h1>
+  <div class="card">
+    <input type="text" id="n1" placeholder="Your Name ❤️">
+    <input type="text" id="n2" placeholder="Their Name 💕">
+    <div class="heart">❤️</div>
+    <button onclick="calculate()">Calculate Love!</button>
+    <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+    <div class="percent" id="percent"></div>
+    <div class="msg" id="msg"></div>
+  </div>
+  <script>
+    function calculate() {
+      const n1 = document.getElementById('n1').value.trim();
+      const n2 = document.getElementById('n2').value.trim();
+      if (!n1 || !n2) { alert('Enter both names!'); return; }
+      let sum = 0;
+      for (let c of (n1+n2).toUpperCase()) sum += c.charCodeAt(0);
+      const score = sum % 100;
+      document.getElementById('bar').style.width = score + '%';
+      document.getElementById('percent').textContent = score + '%';
+      const msgs = { 90: '🔥 Soulmates!', 70: '💕 Great Match!', 50: '😊 Pretty Good!', 30: '🤔 Could work...', 0: '😅 Just friends lol' };
+      let msg = '';
+      for (const k of Object.keys(msgs).sort((a,b)=>b-a)) { if (score >= k) { msg = msgs[k]; break; } }
+      document.getElementById('msg').textContent = \`\${n1} + \${n2} = \${msg}\`;
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  villain: {
+    name: 'Villain Name Generator',
+    explanation: 'Stores arrays of villain prefixes, names, and titles. Uses Math.random() with Math.floor() to pick random items from each array. Combines them into a dramatic villain name and displays it with CSS styling.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Villain Generator - FarhanX</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: sans-serif; background: #0a0a0f; color: #f0f0f8; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  .card { background: #16161f; border: 1px solid #3a1a2a; border-radius: 16px; padding: 2.5rem; max-width: 460px; width: 100%; text-align: center; }
+  h1 { font-size: 2rem; color: #ff3366; margin-bottom: 0.5rem; }
+  .sub { color: #9090b0; font-size: 0.88rem; margin-bottom: 2rem; }
+  input { width: 100%; padding: 12px 16px; background: #0a0a0f; border: 1px solid #3a1a2a; border-radius: 8px; color: #f0f0f8; font-size: 1rem; margin-bottom: 1.5rem; outline: none; }
+  button { background: linear-gradient(135deg, #ff3366, #cc0044); color: #fff; border: none; padding: 14px 36px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 2rem; transition: 0.2s; }
+  button:hover { transform: scale(1.02); opacity: 0.9; }
+  .result { background: rgba(255,51,102,0.1); border: 1px solid rgba(255,51,102,0.3); border-radius: 12px; padding: 1.5rem; display: none; }
+  .villain-name { font-size: 1.6rem; font-weight: bold; color: #ff6b9d; margin-bottom: 0.5rem; }
+  .villain-title { color: #9090b0; font-size: 0.9rem; }
+  .power { color: #ff3366; font-size: 1rem; margin-top: 0.8rem; font-style: italic; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>😈 Villain Generator</h1>
+    <p class="sub">Discover your inner villain!</p>
+    <input type="text" id="uname" placeholder="Enter your name...">
+    <button onclick="generate()">Generate My Villain Name!</button>
+    <div class="result" id="result">
+      <div style="font-size:2.5rem;margin-bottom:0.8rem">😈</div>
+      <div class="villain-name" id="vname"></div>
+      <div class="villain-title" id="vtitle"></div>
+      <div class="power" id="vpower"></div>
+    </div>
+  </div>
+  <script>
+    const prefixes = ['Dark','Shadow','Crimson','Black','Iron','Blood','Chaos','Void','Storm','Doom'];
+    const titles = ['Lord','Master','King','Emperor','Baron','Prince','Duke','Commander'];
+    const powers = ['Controls time itself','Can freeze minds','Summons armies from shadows','Bends reality','Speaks to the dead','Commands lightning','Turns people to stone','Absorbs souls'];
+    function generate() {
+      const name = document.getElementById('uname').value.trim() || 'Unknown';
+      const vname = prefixes[Math.floor(Math.random()*prefixes.length)] + ' ' + name + ' the ' + ['Destroyer','Fallen','Wraith','Phantom','Eternal'][Math.floor(Math.random()*5)];
+      const vtitle = titles[Math.floor(Math.random()*titles.length)] + ' of the ' + ['Dark Realm','Shadow Dimension','Void','Underworld','Crimson Empire'][Math.floor(Math.random()*5)];
+      const power = powers[Math.floor(Math.random()*powers.length)];
+      document.getElementById('vname').textContent = vname;
+      document.getElementById('vtitle').textContent = vtitle;
+      document.getElementById('vpower').textContent = '⚡ Power: ' + power;
+      document.getElementById('result').style.display = 'block';
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  future: {
+    name: 'Future Predictor',
+    explanation: 'Stores an array of funny future predictions. Uses Math.random() and Math.floor() to pick a random prediction each time. A countdown animation using setTimeout makes it feel dramatic before revealing the result.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Future Predictor - FarhanX</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: sans-serif; background: #0a0a0f; color: #f0f0f8; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  h1 { font-size: 2rem; color: #a78bfa; margin-bottom: 0.5rem; }
+  .sub { color: #9090b0; font-size: 0.88rem; margin-bottom: 2rem; }
+  .ball { width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #6d28d9, #1a0a2d); border: 3px solid #7c3aed; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; margin: 0 auto 2rem; box-shadow: 0 0 40px rgba(109,40,217,0.5); cursor: pointer; transition: 0.3s; animation: glow 2s infinite; }
+  @keyframes glow { 0%,100%{box-shadow:0 0 40px rgba(109,40,217,0.5)} 50%{box-shadow:0 0 80px rgba(109,40,217,0.8)} }
+  .ball:hover { transform: scale(1.05); }
+  button { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff; border: none; padding: 14px 36px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 2rem; transition: 0.2s; }
+  button:hover { transform: scale(1.02); opacity: 0.9; }
+  .prediction { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.3); border-radius: 12px; padding: 1.5rem; max-width: 420px; text-align: center; font-size: 1rem; line-height: 1.8; display: none; }
+  .thinking { color: #a78bfa; font-style: italic; }
+</style>
+</head>
+<body>
+  <h1>🔮 Future Predictor</h1>
+  <p class="sub">The crystal ball knows all...</p>
+  <div class="ball" onclick="predict()">🔮</div>
+  <button onclick="predict()">See My Future!</button>
+  <div class="prediction" id="prediction"></div>
+  <script>
+    const futures = [
+      'In 5 years, you will accidentally become famous for a weird dance video.',
+      'You will find a forgotten ₹500 note in an old jacket. Today.',
+      'A random cat will choose you as its human. You have no say in this.',
+      'You will start a business that nobody understands, but somehow it works.',
+      'You will meet your best friend in an elevator while arguing on the phone.',
+      'One day you will fix a bug on the first try. It will feel suspicious.',
+      'A pigeon will stare at you for way too long. It knows something.',
+      'You will accidentally learn a new skill by watching one YouTube video at 2 AM.',
+      'Someone will mistakenly send you an important email. It will change your life.',
+      'You will become very good at a skill you have not discovered yet.'
+    ];
+    function predict() {
+      const el = document.getElementById('prediction');
+      el.style.display = 'block';
+      el.innerHTML = '<span class="thinking">🔮 Reading the cosmic energy...</span>';
+      setTimeout(() => {
+        el.innerHTML = '✨ ' + futures[Math.floor(Math.random()*futures.length)];
+      }, 1800);
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  friend: {
+    name: 'Friendship Detector',
+    explanation: 'Similar algorithm to Love Calculator but with a friendship theme. Uses string character codes summed together with modulo math to generate a consistent score for any two names. Different messages appear based on score ranges.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Friendship Detector - FarhanX</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:sans-serif;background:#0a0a0f;color:#f0f0f8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+  h1{font-size:2rem;color:#00e5a0;margin-bottom:2rem}
+  .card{background:#16161f;border:1px solid #2a2a3a;border-radius:16px;padding:2.5rem;max-width:420px;width:100%;text-align:center}
+  input{width:100%;padding:12px 16px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:8px;color:#f0f0f8;font-size:1rem;margin-bottom:1rem;outline:none}
+  input:focus{border-color:#00e5a0}
+  button{background:#00e5a0;color:#000;border:none;padding:14px 36px;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;width:100%;margin:1rem 0;transition:0.2s}
+  button:hover{opacity:0.85}
+  .emoji{font-size:3rem;margin:1rem 0}
+  .score{font-size:2.5rem;font-weight:bold;color:#00e5a0}
+  .label{color:#9090b0;font-size:0.88rem;margin-top:0.5rem}
+</style>
+</head>
+<body>
+  <h1>🤝 Friendship Detector</h1>
+  <div class="card">
+    <input type="text" id="f1" placeholder="Friend 1 Name 🙋">
+    <input type="text" id="f2" placeholder="Friend 2 Name 🙋">
+    <div class="emoji">🤝</div>
+    <button onclick="detect()">Detect Friendship!</button>
+    <div class="score" id="fscore"></div>
+    <div class="label" id="flabel"></div>
+  </div>
+  <script>
+    function detect(){
+      const a=document.getElementById('f1').value.trim(), b=document.getElementById('f2').value.trim();
+      if(!a||!b){alert('Enter both names!');return}
+      let s=0; for(let c of (a+b).toUpperCase()) s+=c.charCodeAt(0);
+      const score=s%100;
+      document.getElementById('fscore').textContent=score+'%';
+      const labels=[{t:90,m:'👑 Legendary BFFs!'},{t:70,m:'🌟 Great Friends!'},{t:50,m:'😊 Good Match!'},{t:30,m:'🤔 Growing Bond'},{t:0,m:'😅 Getting there!'}];
+      document.getElementById('flabel').textContent=labels.find(l=>score>=l.t).m;
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  iq: {
+    name: 'IQ Scanner',
+    explanation: 'A fun fake IQ test! After a dramatic scanning animation using setInterval, it generates a random IQ number between 85-155. The result changes each time making it unpredictable and fun to share.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>IQ Scanner - FarhanX</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:sans-serif;background:#0a0a0f;color:#f0f0f8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+  h1{font-size:2rem;color:#0099ff;margin-bottom:2rem}
+  .scanner{width:150px;height:150px;border-radius:50%;border:3px solid #0099ff;display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 2rem;position:relative;overflow:hidden}
+  .scan-line{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,#0099ff,transparent);animation:scan 1.5s linear infinite;display:none}
+  @keyframes scan{0%{top:0}100%{top:100%}}
+  button{background:#0099ff;color:#fff;border:none;padding:14px 36px;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;transition:0.2s}
+  button:hover{opacity:0.85;transform:scale(1.02)}
+  .result{margin-top:2rem;font-size:1rem;color:#9090b0;min-height:80px}
+  .iq-num{font-size:3rem;font-weight:bold;color:#0099ff}
+  .iq-label{color:#00e5a0;font-size:1rem;margin-top:0.5rem}
+</style>
+</head>
+<body>
+  <h1>🧠 IQ Scanner</h1>
+  <div class="scanner"><span id="scan-icon">🧠</span><div class="scan-line" id="sline"></div></div>
+  <button onclick="scanIQ()">Scan My IQ!</button>
+  <div class="result" id="result"></div>
+  <script>
+    function scanIQ(){
+      document.getElementById('result').innerHTML='<span style="color:#0099ff">Scanning brain waves... 🔬</span>';
+      document.getElementById('sline').style.display='block';
+      document.getElementById('scan-icon').textContent='⚡';
+      setTimeout(()=>{
+        document.getElementById('sline').style.display='none';
+        document.getElementById('scan-icon').textContent='🧠';
+        const iq=Math.floor(Math.random()*70)+85;
+        const labels={150:'🏆 Genius Level!',130:'⭐ Very Superior',120:'✅ Superior',110:'😊 Above Average',100:'👍 Average',85:'🤷 Below Average'};
+        const label=Object.keys(labels).sort((a,b)=>b-a).find(k=>iq>=k);
+        document.getElementById('result').innerHTML=\`<div class="iq-num">\${iq}</div><div class="iq-label">\${labels[label]}</div>\`;
+      },2500);
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  superhero: {
+    name: 'Superhero Generator',
+    explanation: 'Uses arrays of superhero name parts, powers, and weaknesses. Math.random() picks from each array. The name input is incorporated into the hero name to make it feel personal. Results are displayed with animations.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Superhero Generator - FarhanX</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:sans-serif;background:#0a0a0f;color:#f0f0f8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+  h1{font-size:2rem;color:#f7df1e;margin-bottom:2rem;text-align:center}
+  .card{background:#16161f;border:1px solid #2a2a3a;border-radius:16px;padding:2.5rem;max-width:440px;width:100%;text-align:center}
+  input{width:100%;padding:12px 16px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:8px;color:#f0f0f8;font-size:1rem;margin-bottom:1.5rem;outline:none}
+  button{background:linear-gradient(135deg,#f7df1e,#d4a017);color:#000;border:none;padding:14px 36px;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;width:100%;transition:0.2s}
+  button:hover{opacity:0.85}
+  .hero-result{background:rgba(247,223,30,0.07);border:1px solid rgba(247,223,30,0.2);border-radius:12px;padding:1.5rem;margin-top:1.5rem;display:none}
+  .hero-name{font-size:1.6rem;font-weight:bold;color:#f7df1e}
+  .hero-power{color:#00e5a0;margin-top:0.6rem}
+  .hero-weak{color:#ff6b35;font-size:0.85rem;margin-top:0.4rem}
+</style>
+</head>
+<body>
+  <h1>🦸 Superhero Generator</h1>
+  <div class="card">
+    <input type="text" id="hname" placeholder="Enter your real name...">
+    <button onclick="generate()">Discover My Hero Identity!</button>
+    <div class="hero-result" id="hresult">
+      <div style="font-size:3rem;margin-bottom:0.8rem" id="hero-icon">🦸</div>
+      <div class="hero-name" id="hname2"></div>
+      <div class="hero-power" id="hpower"></div>
+      <div class="hero-weak" id="hweak"></div>
+    </div>
+  </div>
+  <script>
+    const pre=['Ultra','Mega','Cosmic','Thunder','Blaze','Shadow','Quantum','Hyper'];
+    const suf=['Knight','Hawk','Force','Blade','Storm','Phoenix','Shield','Arrow'];
+    const powers=['🔥 Control over fire','⚡ Lightning speed','🧊 Cryogenic freeze','🌊 Control water','🌀 Teleportation','🛡️ Invincibility','🌟 Energy blasts','🦅 Supersonic flight'];
+    const weaknesses=['🎵 Country music','☕ Decaf coffee','🧦 Mismatched socks','🤧 Flower pollen','📱 Low battery anxiety'];
+    function generate(){
+      const name=document.getElementById('hname').value.trim()||'Hero';
+      document.getElementById('hname2').textContent=pre[Math.floor(Math.random()*pre.length)]+' '+name+' '+suf[Math.floor(Math.random()*suf.length)];
+      document.getElementById('hpower').textContent='⚡ Power: '+powers[Math.floor(Math.random()*powers.length)];
+      document.getElementById('hweak').textContent='⚠️ Weakness: '+weaknesses[Math.floor(Math.random()*weaknesses.length)];
+      document.getElementById('hresult').style.display='block';
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  eid: {
+    name: 'Eid Greeting Generator',
+    explanation: 'Takes a name input and generates personalized Eid Mubarak greetings. Uses template literals to insert the name. CSS animations create a festive star/crescent effect. Multiple greeting templates are stored in an array.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Eid Greeting - FarhanX</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:sans-serif;background:#0a1628;color:#f0f0f8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+  .stars{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden;z-index:0;pointer-events:none}
+  .star{position:absolute;color:#f7df1e;font-size:1rem;animation:twinkle 3s infinite}
+  @keyframes twinkle{0%,100%{opacity:0.3}50%{opacity:1}}
+  .content{position:relative;z-index:1;max-width:480px;width:100%}
+  h1{font-size:2rem;color:#f7df1e;margin-bottom:0.5rem}
+  .sub{color:#9090b0;margin-bottom:2rem}
+  input{width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(247,223,30,0.3);border-radius:8px;color:#f0f0f8;font-size:1rem;margin-bottom:1rem;outline:none;text-align:center}
+  button{background:linear-gradient(135deg,#d4a017,#f7df1e);color:#000;border:none;padding:14px 36px;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;width:100%;transition:0.2s;margin-bottom:1.5rem}
+  .greeting{background:rgba(247,223,30,0.08);border:1px solid rgba(247,223,30,0.3);border-radius:16px;padding:2rem;display:none;line-height:2}
+  .greeting-text{font-size:1.1rem;color:#f0f0f8}
+  .eid-big{font-size:2.5rem;color:#f7df1e;font-weight:bold;margin:0.5rem 0}
+</style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="content">
+    <h1>🌙 Eid Greeting</h1>
+    <p class="sub">Create personalized Eid wishes</p>
+    <input type="text" id="ename" placeholder="Enter recipient's name...">
+    <button onclick="genEid()">Generate Eid Greeting ✨</button>
+    <div class="greeting" id="eid-result">
+      <div style="font-size:2.5rem">🌙⭐🕌</div>
+      <div class="eid-big">Eid Mubarak!</div>
+      <div class="greeting-text" id="eid-text"></div>
+    </div>
+  </div>
+  <script>
+    // Create stars
+    for(let i=0;i<20;i++){
+      const s=document.createElement('div');
+      s.className='star'; s.textContent='⭐';
+      s.style.cssText=\`left:\${Math.random()*100}%;top:\${Math.random()*100}%;animation-delay:\${Math.random()*3}s;font-size:\${0.5+Math.random()}rem\`;
+      document.getElementById('stars').appendChild(s);
+    }
+    const wishes=['May this Eid bring you endless joy, love, and blessings. Wishing you a day filled with smiles!','May Allah bless you and your family with happiness, health and peace on this special occasion.','Sending you warm Eid wishes. May your home be filled with laughter and your heart with gratitude.'];
+    function genEid(){
+      const name=document.getElementById('ename').value.trim()||'Dear Friend';
+      document.getElementById('eid-text').textContent='Dear '+name+', '+wishes[Math.floor(Math.random()*wishes.length)];
+      document.getElementById('eid-result').style.display='block';
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  anniversary: {
+    name: 'Anniversary Greeting',
+    explanation: 'Takes two names and number of years. Generates a beautiful anniversary message using template literals. A confetti effect uses random div elements with CSS animations to simulate falling confetti particles on click.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Anniversary Greeting - FarhanX</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:sans-serif;background:#0a0a0f;color:#f0f0f8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+  .confetti-piece{position:fixed;width:10px;height:10px;border-radius:2px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{0%{top:-20px;opacity:1}100%{top:110vh;opacity:0}}
+  h1{font-size:2rem;color:#ff6b9d;margin-bottom:2rem}
+  .card{background:#16161f;border:1px solid #2a1a2a;border-radius:16px;padding:2rem;max-width:420px;width:100%}
+  input{width:100%;padding:10px 14px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:8px;color:#f0f0f8;font-size:0.95rem;margin-bottom:1rem;outline:none}
+  button{background:linear-gradient(135deg,#ff6b9d,#ff3366);color:#fff;border:none;padding:13px 30px;border-radius:10px;font-size:1rem;font-weight:bold;cursor:pointer;width:100%;transition:0.2s}
+  .result{background:rgba(255,107,157,0.08);border:1px solid rgba(255,107,157,0.3);border-radius:12px;padding:1.5rem;margin-top:1.5rem;display:none;line-height:2}
+  .anni-msg{font-size:0.95rem;color:#f0f0f8}
+  .anni-year{font-size:2.5rem;font-weight:bold;color:#ff6b9d;margin:0.5rem 0}
+</style>
+</head>
+<body>
+  <h1>💍 Anniversary Greeting</h1>
+  <div class="card">
+    <input type="text" id="an1" placeholder="Name 1 💕">
+    <input type="text" id="an2" placeholder="Name 2 💕">
+    <input type="number" id="ayears" placeholder="Years together..." min="1" max="100">
+    <button onclick="genAnniversary()">Generate Greeting! 🎉</button>
+    <div class="result" id="anni-result">
+      <div style="font-size:2rem">💍❤️🎉</div>
+      <div class="anni-year" id="anni-year"></div>
+      <div class="anni-msg" id="anni-msg"></div>
+    </div>
+  </div>
+  <script>
+    function confetti(){
+      const colors=['#ff6b9d','#f7df1e','#00e5a0','#0099ff','#ff6b35'];
+      for(let i=0;i<60;i++){
+        const c=document.createElement('div');
+        c.className='confetti-piece';
+        c.style.cssText=\`left:\${Math.random()*100}vw;background:\${colors[Math.floor(Math.random()*5)]};animation-duration:\${1.5+Math.random()*2}s;animation-delay:\${Math.random()}s;transform:rotate(\${Math.random()*360}deg)\`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+      }
+    }
+    function genAnniversary(){
+      const n1=document.getElementById('an1').value.trim()||'You',n2=document.getElementById('an2').value.trim()||'Your Partner';
+      const yr=document.getElementById('ayears').value||'1';
+      document.getElementById('anni-year').textContent=yr+' Year'+(yr>1?'s':'')+' of Love!';
+      document.getElementById('anni-msg').textContent=\`Happy \${yr}th Anniversary, \${n1} & \${n2}! 🥂 Every moment with you is a treasure. Here's to countless more years of laughter, love, and beautiful memories together. ❤️\`;
+      document.getElementById('anni-result').style.display='block';
+      confetti();
+    }
+  <\/script>
+</body>
+</html>`
+  },
+  life: {
+    name: 'Random Life Generator',
+    explanation: 'Generates a fictional life story by randomly picking from arrays of jobs, cities, achievements, and life events. All elements are combined into a narrative paragraph using template literals. Makes every result unique and hilarious.',
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Random Life Generator - FarhanX</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:sans-serif;background:#0a0a0f;color:#f0f0f8;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+  h1{font-size:2rem;color:#00e5a0;margin-bottom:2rem}
+  button{background:#00e5a0;color:#000;border:none;padding:14px 36px;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;transition:0.2s;margin-bottom:2rem}
+  button:hover{opacity:0.85;transform:scale(1.02)}
+  .life-card{background:#16161f;border:1px solid #2a2a3a;border-radius:16px;padding:2rem;max-width:500px;width:100%;text-align:left;display:none}
+  .life-item{margin-bottom:0.8rem;font-size:0.92rem;color:#f0f0f8;line-height:1.8}
+  .life-item span{color:#00e5a0;font-weight:bold}
+</style>
+</head>
+<body>
+  <h1>🎲 Random Life Generator</h1>
+  <button onclick="genLife()">Generate My Life!</button>
+  <div class="life-card" id="life-card" style="text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:1rem">🎭</div>
+    <div id="life-content"></div>
+  </div>
+  <script>
+    const jobs=['Software Engineer','Professional Cat Trainer','Retired Astronaut','Accidental YouTuber','Underground Chef','Time Traveler (Part-time)','AI Whisperer'];
+    const cities=['Lahore','Tokyo','Dubai','Amsterdam','Mars Colony 3','Karachi','London'];
+    const events=['accidentally went viral on TikTok','discovered a new type of coffee','wrote a bestselling book while sleeping','taught a parrot 3 coding languages','won a cooking contest without knowing how to cook'];
+    const endings=['Currently writing memoirs.','Still confused about it all.','Zero regrets. 10/10 would do again.','Somehow profitable.','The cat takes the credit.'];
+    function r(arr){return arr[Math.floor(Math.random()*arr.length)]}
+    function genLife(){
+      const age=Math.floor(Math.random()*30)+22;
+      const html=\`
+        <div class="life-item">👤 Age: <span>\${age}</span></div>
+        <div class="life-item">💼 Career: <span>\${r(jobs)}</span></div>
+        <div class="life-item">🌍 Lives in: <span>\${r(cities)}</span></div>
+        <div class="life-item">💰 Net Worth: <span>₹\${Math.floor(Math.random()*900+100)}K (and climbing)</span></div>
+        <div class="life-item">✨ Life Event: <span>Once \${r(events)}</span></div>
+        <div class="life-item">🐾 Pet: <span>\${r(['A judgmental cat','3 fish named after planets','No pets but feeds the neighbor\\'s dog'])}</span></div>
+        <div class="life-item" style="color:#9090b0;margin-top:1rem;font-style:italic">\${r(endings)}</div>
+      \`;
+      document.getElementById('life-content').innerHTML=html;
+      document.getElementById('life-card').style.display='block';
+    }
+  <\/script>
+</body>
+</html>`
+  }
+};
+
+function openProject(key) {
+  const p = projects[key];
+  if (!p) return;
+  document.getElementById('modal-title').textContent = p.name;
+  document.getElementById('modal-code').textContent = p.code;
+  document.getElementById('modal-explanation').textContent = p.explanation;
+  document.getElementById('code-modal').classList.add('open');
+  switchTab('code', document.querySelector('.tab-btn'));
+}
+
+function runInPlayground(key) {
+  const p = projects[key];
+  if (!p) return;
+  pgCode.html = p.code;
+  activePgTab = 'html';
+  document.getElementById('code-editor').value = p.code;
+  document.querySelectorAll('.pg-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('pg-html-tab').classList.add('active');
+  document.getElementById('playground').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(runCode, 400);
+}
+
+function closeModal() {
+  document.getElementById('code-modal').classList.remove('open');
+}
+
+function switchTab(tab, btn) {
+  document.getElementById('tab-code').style.display = tab === 'code' ? '' : 'none';
+  document.getElementById('tab-explain').style.display = tab === 'explain' ? '' : 'none';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else document.querySelector('.tab-btn').classList.add('active');
+}
+
+function copyCode() {
+  const code = document.getElementById('modal-code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Code'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+// Close modal on outside click
+document.getElementById('code-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.getElementById('learn-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeLearnModal();
+});
+
+// ===== LEARN MODAL =====
+const learnContent = {
+  html: {
+    title: '🏗️ HTML Basics',
+    body: `
+<div style="color:var(--text2);font-size:0.9rem;line-height:2">
+  <h3 style="color:var(--accent);font-family:var(--font-head);margin-bottom:1rem">What is HTML?</h3>
+  <p style="margin-bottom:1.5rem">HTML (HyperText Markup Language) is the skeleton of every webpage. It defines the structure and content using <strong style="color:var(--text)">tags</strong>.</p>
+  
+  <h3 style="color:var(--accent);font-family:var(--font-head);margin-bottom:1rem">Basic Structure</h3>
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;font-family:var(--font-code);font-size:0.8rem;margin-bottom:1.5rem;line-height:2">
+&lt;!DOCTYPE html&gt;        &lt;!-- Declares HTML5 --&gt;
+&lt;html lang="en"&gt;        &lt;!-- Root element --&gt;
+  &lt;head&gt;               &lt;!-- Info for browser --&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;               &lt;!-- Visible content --&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+  </div>
+  
+  <h3 style="color:var(--accent);font-family:var(--font-head);margin-bottom:1rem">Common Tags</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1.5rem">
+    ${[['&lt;h1&gt; to &lt;h6&gt;','Headings'],['&lt;p&gt;','Paragraph'],['&lt;a href=""&gt;','Links'],['&lt;img src=""&gt;','Images'],['&lt;div&gt;','Container'],['&lt;button&gt;','Clickable button'],['&lt;input&gt;','User input'],['&lt;form&gt;','Forms']].map(([tag,desc])=>`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.8rem"><div style="font-family:var(--font-code);font-size:0.78rem;color:var(--accent)">${tag}</div><div style="font-size:0.8rem;color:var(--text3)">${desc}</div></div>`).join('')}
+  </div>
+  <p>💡 <strong style="color:var(--text)">Pro Tip:</strong> Try the Playground above to practice these tags live!</p>
+</div>`
+  },
+  css: {
+    title: '🎨 CSS Styling',
+    body: `
+<div style="color:var(--text2);font-size:0.9rem;line-height:2">
+  <h3 style="color:#0099ff;font-family:var(--font-head);margin-bottom:1rem">What is CSS?</h3>
+  <p style="margin-bottom:1.5rem">CSS (Cascading Style Sheets) makes your HTML look beautiful — colors, fonts, layouts, animations and more!</p>
+  
+  <h3 style="color:#0099ff;font-family:var(--font-head);margin-bottom:1rem">Basic Syntax</h3>
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;font-family:var(--font-code);font-size:0.8rem;margin-bottom:1.5rem;line-height:2">
+selector {
+  property: value;
+}
+
+/* Example */
+h1 {
+  color: #00e5a0;
+  font-size: 2rem;
+  text-align: center;
+}
+  </div>
+  
+  <h3 style="color:#0099ff;font-family:var(--font-head);margin-bottom:1rem">Must-Know Properties</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1.5rem">
+    ${[['color','Text color'],['background','BG color/image'],['font-size','Text size'],['padding','Inner space'],['margin','Outer space'],['display: flex','Flexible layout'],['border-radius','Round corners'],['animation','Motion effects']].map(([p,d])=>`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.8rem"><div style="font-family:var(--font-code);font-size:0.78rem;color:#0099ff">${p}</div><div style="font-size:0.8rem;color:var(--text3)">${d}</div></div>`).join('')}
+  </div>
+</div>`
+  },
+  js: {
+    title: '⚡ JavaScript',
+    body: `
+<div style="color:var(--text2);font-size:0.9rem;line-height:2">
+  <h3 style="color:#d4b800;font-family:var(--font-head);margin-bottom:1rem">What is JavaScript?</h3>
+  <p style="margin-bottom:1.5rem">JavaScript makes websites interactive! Buttons that do things, animations, calculators, games — all JavaScript.</p>
+  
+  <h3 style="color:#d4b800;font-family:var(--font-head);margin-bottom:1rem">Core Concepts</h3>
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;font-family:var(--font-code);font-size:0.8rem;margin-bottom:1.5rem;line-height:2">
+// Variables
+let name = "Farhan";
+const score = 100;
+
+// Function
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+// DOM - Change HTML
+document.getElementById('title').textContent = 'New Text!';
+
+// Event - React to clicks
+button.addEventListener('click', function() {
+  alert('Clicked!');
+});
+
+// Random number (used in all projects!)
+let random = Math.floor(Math.random() * 10);
+  </div>
+  <p>💡 All 10 projects on this site use these basic concepts. Study one project and you'll understand them all!</p>
+</div>`
+  }
+};
+
+function openLearn(type) {
+  const data = learnContent[type];
+  document.getElementById('learn-modal-title').textContent = data.title;
+  document.getElementById('learn-modal-body').innerHTML = data.body;
+  document.getElementById('learn-modal').classList.add('open');
+}
+
+function closeLearnModal() {
+  document.getElementById('learn-modal').classList.remove('open');
+}
+
+// ===== TEMPLATES =====
+function openTemplate(type) {
+  const templates = {
+    portfolio: '<!-- Portfolio Template -->\n<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>My Portfolio</title>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  body { font-family: sans-serif; background: #0a0a0f; color: #f0f0f8; }\n  nav { padding: 1.5rem 5%; display: flex; justify-content: space-between; border-bottom: 1px solid #222; }\n  .logo { color: #00e5a0; font-weight: bold; font-size: 1.3rem; }\n  .hero { padding: 5rem 5%; text-align: center; }\n  h1 { font-size: 3rem; margin-bottom: 1rem; }\n  h1 span { color: #00e5a0; }\n  p { color: #888; font-size: 1.1rem; max-width: 500px; margin: 0 auto 2rem; }\n  .btn { background: #00e5a0; color: #000; padding: 14px 32px; border: none; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; }\n  footer { text-align: center; padding: 2rem; color: #555; border-top: 1px solid #222; margin-top: 4rem; }\n</style>\n</head>\n<body>\n  <nav><div class="logo">YourName</div><div>Portfolio</div></nav>\n  <div class="hero">\n    <h1>Hi, I\'m <span>Your Name</span></h1>\n    <p>A passionate web developer building cool things for the internet.</p>\n    <button class="btn">View My Work</button>\n  </div>\n  <footer>Made with ❤️ by YourName</footer>\n</body>\n</html>',
+    blog: '<!-- Blog Template -->\n<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>My Blog</title>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  body { font-family: Georgia, serif; background: #fff; color: #222; max-width: 720px; margin: 0 auto; padding: 2rem; }\n  h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }\n  .date { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }\n  p { line-height: 1.9; margin-bottom: 1.5rem; font-size: 1.05rem; }\n  hr { border: none; border-top: 1px solid #eee; margin: 2rem 0; }\n</style>\n</head>\n<body>\n  <h1>My First Blog Post</h1>\n  <div class="date">May 2025</div>\n  <p>Welcome to my blog! This is where I share my thoughts and learnings about web development.</p>\n  <p>Today I want to talk about why learning to code from real projects is so much better than theory...</p>\n  <hr>\n  <p style="color:#888;font-size:0.88rem">Written by YourName</p>\n</body>\n</html>',
+    landing: '<!-- Landing Page Template -->\n<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>My Product</title>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  body { font-family: sans-serif; background: #050510; color: #f0f0f8; }\n  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; background: radial-gradient(circle at 50% 50%, rgba(0,229,160,0.08), transparent 60%); }\n  h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; }\n  h1 em { color: #00e5a0; font-style: normal; }\n  p { font-size: 1.15rem; color: #9090b0; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; }\n  .cta { background: #00e5a0; color: #000; padding: 16px 40px; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.2s; }\n  .cta:hover { transform: scale(1.05); }\n</style>\n</head>\n<body>\n  <div class="hero">\n    <h1>The <em>Future</em><br>Starts Here</h1>\n    <p>Your product description goes here. Make it exciting. Make it clear. Make it convert.</p>\n    <button class="cta" onclick="alert(\'Welcome! 🎉\')">Get Started Free →</button>\n  </div>\n</body>\n</html>',
+    linkinbio: '<!-- Link in Bio Template -->\n<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>@YourHandle</title>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  body { font-family: sans-serif; background: #0a0a0f; color: #f0f0f8; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }\n  .profile { text-align: center; max-width: 380px; width: 100%; }\n  .avatar { width: 90px; height: 90px; border-radius: 50%; background: #00e5a0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1rem; }\n  h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }\n  .bio { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }\n  .link-btn { display: block; background: #16161f; border: 1px solid #2a2a3a; color: #f0f0f8; padding: 14px 20px; border-radius: 12px; margin-bottom: 12px; font-size: 0.95rem; text-decoration: none; transition: 0.2s; }\n  .link-btn:hover { border-color: #00e5a0; color: #00e5a0; }\n</style>\n</head>\n<body>\n  <div class="profile">\n    <div class="avatar">😊</div>\n    <h2>@YourHandle</h2>\n    <p class="bio">Web Developer | Creator | Pakistan 🇵🇰</p>\n    <a href="#" class="link-btn">🌐 My Website</a>\n    <a href="#" class="link-btn">📺 My YouTube</a>\n    <a href="#" class="link-btn">💼 My Portfolio</a>\n    <a href="#" class="link-btn">📧 Contact Me</a>\n  </div>\n</body>\n</html>'
+  };
+  const code = templates[type];
+  if (code) {
+    navigator.clipboard.writeText(code).then(() => {
+      alert('✅ Template copied! Paste it in a new .html file and open in your browser!');
+    }).catch(() => {
+      // Fallback: show in playground
+      pgCode.html = code;
+      activePgTab = 'html';
+      document.getElementById('code-editor').value = code;
+      document.getElementById('playground').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(runCode, 400);
+    });
+  }
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeLearnModal(); }
+});
+</script>
+
+</body>
+</html>
